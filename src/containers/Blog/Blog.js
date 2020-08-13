@@ -16,7 +16,7 @@ class Blog extends Component {
   //Promise was introduced with ES6
   componentDidMount() {
     axios
-      .get("http://jsonplaceholder.typicode.com/posts")
+      .get("/posts")
       .then((response) => {
         const posts = response.data.slice(0, 4);
         const updatedPosts = posts.map((post) => {
