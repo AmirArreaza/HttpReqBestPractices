@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import { Route, NavLink } from "react-router-dom";
+import { Route, NavLink, Switch } from "react-router-dom";
 
 import "./Blog.css";
 import Posts from "./Posts/Posts";
 import NewPost from "./NewPost/NewPost";
+import Post from "./FullPost/FullPost";
+import FullPost from "./FullPost/FullPost";
 
 class Blog extends Component {
   render() {
@@ -41,8 +43,13 @@ class Blog extends Component {
           </nav>
         </header>
         {/*<Route path="/" exact render={() => <Posts />}/>*/}
-        <Route path="/" exact component={Posts} />
-        <Route path="/new-post" exact component={NewPost} />
+        <Switch>
+          <Route path="/" exact component={Posts} />
+          <Route path="/new-post" exact component={NewPost} />
+          <Route path="/:id" exact component={FullPost} />
+          {/* Moved below as it is dynamic and we don't want new-post to be treated as a dynamic id*/}
+          {/* The order is important while using Switch */}
+        </Switch>
       </div>
     );
   }
