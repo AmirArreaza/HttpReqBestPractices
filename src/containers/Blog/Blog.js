@@ -50,7 +50,8 @@ class Blog extends Component {
         <Switch>
           {this.state.auth ? <Route path="/new-post" exact component={NewPost}/> : null}
           <Route path="/posts" component={Posts} />
-          <Redirect from="/" to="/posts"/>
+          <Route render={() => <h1>Not Found!</h1>}/>
+          {/*<Redirect from="/" to="/posts"/> */}
           {/* Moved below as it is dynamic and we don't want new-post to be treated as a dynamic id*/}
           {/* The order is important while using Switch */}
         </Switch>
