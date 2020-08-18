@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, NavLink, Switch } from "react-router-dom";
+import { Route, NavLink, Switch, Redirect } from "react-router-dom";
 
 import "./Blog.css";
 import Posts from "./Posts/Posts";
@@ -44,6 +44,7 @@ class Blog extends Component {
         <Switch>
           <Route path="/new-post" exact component={NewPost} />
           <Route path="/posts" component={Posts} />
+          <Redirect from="/" to="/posts"/>
           {/* Moved below as it is dynamic and we don't want new-post to be treated as a dynamic id*/}
           {/* The order is important while using Switch */}
         </Switch>
