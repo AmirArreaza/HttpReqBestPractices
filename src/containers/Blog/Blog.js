@@ -4,8 +4,6 @@ import { Route, NavLink, Switch } from "react-router-dom";
 import "./Blog.css";
 import Posts from "./Posts/Posts";
 import NewPost from "./NewPost/NewPost";
-import Post from "./FullPost/FullPost";
-import FullPost from "./FullPost/FullPost";
 
 class Blog extends Component {
   render() {
@@ -16,7 +14,7 @@ class Blog extends Component {
             <ul>
               <li>
                 <NavLink
-                  to="/"
+                  to="/posts"
                   exact
                   activeClassName="my-active"
                   activeStyle={{
@@ -24,7 +22,7 @@ class Blog extends Component {
                     textDecoration: "underline",
                   }}
                 >
-                  Home
+                  Posts
                 </NavLink>
               </li>
               <li>
@@ -44,9 +42,8 @@ class Blog extends Component {
         </header>
         {/*<Route path="/" exact render={() => <Posts />}/>*/}
         <Switch>
-          <Route path="/" exact component={Posts} />
           <Route path="/new-post" exact component={NewPost} />
-          <Route path="/:id" exact component={FullPost} />
+          <Route path="/posts" component={Posts} />
           {/* Moved below as it is dynamic and we don't want new-post to be treated as a dynamic id*/}
           {/* The order is important while using Switch */}
         </Switch>
