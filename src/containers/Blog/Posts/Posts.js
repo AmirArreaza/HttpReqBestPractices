@@ -13,6 +13,7 @@ class Posts extends Component {
 
   //Promise was introduced with ES6
   componentDidMount() {
+    
     console.log(this.props);
     axios
       .get("/posts")
@@ -34,10 +35,11 @@ class Posts extends Component {
   }
 
   postSelectedHandler = (id) => {
-    this.props.history.push({ pathname: "/posts/" + id });
+    this.props.history.push({ pathname: "/posts" + id });
   };
 
   render() {
+    console.log(this.props);
     let posts = <p style={{ textAlign: "center" }}>Something went wrong!</p>;
     if (!this.state.error) {
       posts = this.state.posts.map((post) => {

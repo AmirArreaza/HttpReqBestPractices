@@ -1,13 +1,15 @@
-import React, { Component } from "react";
+import React, { Component, Suspense } from "react";
 import { Route, NavLink, Switch, Redirect } from "react-router-dom";
 
 import "./Blog.css";
-import Posts from "./Posts/Posts";
+//import Posts from "./Posts/Posts";
 import asyncComponent from "../../hoc/asyncComponent";
 //import NewPost from "./NewPost/NewPost";
 
+const Posts = React.lazy(() => import("./Posts/Posts"));
+
 const asyncNewPost = asyncComponent(() => {
-  return import('./NewPost/NewPost');
+  return import("./NewPost/NewPost");
 });
 
 class Blog extends Component {
@@ -53,7 +55,14 @@ class Blog extends Component {
           {this.state.auth ? (
             <Route path="/new-post" component={asyncNewPost} />
           ) : null}
-          <Route path="/posts" component={Posts} />
+          <Route
+            path="/posts"
+            render={props => (
+              <Suspense fallback={<div>Loading...</div>}>
+                <Posts {...props}/>
+              </Suspense>
+            )}
+          />
           <Route render={() => <h1>Not Found!</h1>} />
           {/*<Redirect from="/" to="/posts"/> */}
           {/* Moved below as it is dynamic and we don't want new-post to be treated as a dynamic id*/}
