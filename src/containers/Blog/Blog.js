@@ -3,15 +3,17 @@ import { Route, NavLink, Switch, Redirect } from "react-router-dom";
 
 import "./Blog.css";
 import Posts from "./Posts/Posts";
-import NewPost from "./NewPost/NewPost";
+import asyncComponent from "../../hoc/asyncComponent";
+//import NewPost from "./NewPost/NewPost";
+
+const asyncNewPost = asyncComponent(() => {
+  return import('./NewPost/NewPost');
+});
 
 class Blog extends Component {
-
   state = {
-    auth: false
-  }
-
-
+    auth: true,
+  };
   render() {
     return (
       <div className="Blog">
@@ -48,9 +50,11 @@ class Blog extends Component {
         </header>
         {/*<Route path="/" exact render={() => <Posts />}/>*/}
         <Switch>
-          {this.state.auth ? <Route path="/new-post" exact component={NewPost}/> : null}
+          {this.state.auth ? (
+            <Route path="/new-post" component={asyncNewPost} />
+          ) : null}
           <Route path="/posts" component={Posts} />
-          <Route render={() => <h1>Not Found!</h1>}/>
+          <Route render={() => <h1>Not Found!</h1>} />
           {/*<Redirect from="/" to="/posts"/> */}
           {/* Moved below as it is dynamic and we don't want new-post to be treated as a dynamic id*/}
           {/* The order is important while using Switch */}
