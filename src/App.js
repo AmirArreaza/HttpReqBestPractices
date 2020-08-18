@@ -7,6 +7,7 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
+        {/*<BrowserRouter basename="/">*/}
         <BrowserRouter>
           <div className="App">
             <Blog />
